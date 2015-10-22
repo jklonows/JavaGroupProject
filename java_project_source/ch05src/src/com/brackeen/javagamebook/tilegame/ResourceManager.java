@@ -28,6 +28,7 @@ public class ResourceManager {
     private Sprite goalSprite;
     private Sprite grubSprite;
     private Sprite flySprite;
+    private Sprite proSprite;
 
     /**
         Creates a new ResourceManager with the specified
@@ -184,7 +185,10 @@ public class ResourceManager {
 
         return newMap;
     }
-
+    
+    public void shoot(int X, int Y) {
+        //addSprite(newMap, proSprite, X, Y);
+    }
 
     private void addSprite(TileMap map,
         Sprite hostSprite, int tileX, int tileY)
@@ -246,6 +250,8 @@ public class ResourceManager {
             loadImage("fly3.png"),
             loadImage("grub1.png"),
             loadImage("grub2.png"),
+            loadImage("pro1.png"),
+            loadImage("pro2.png"),
         };
 
         images[1] = new Image[images[0].length];
@@ -264,6 +270,8 @@ public class ResourceManager {
         Animation[] playerAnim = new Animation[4];
         Animation[] flyAnim = new Animation[4];
         Animation[] grubAnim = new Animation[4];
+        Animation[] proAnim = new Animation[4];
+        
         for (int i=0; i<4; i++) {
             playerAnim[i] = createPlayerAnim(
                 images[i][0], images[i][1], images[i][2]);
@@ -271,6 +279,7 @@ public class ResourceManager {
                 images[i][3], images[i][4], images[i][5]);
             grubAnim[i] = createGrubAnim(
                 images[i][6], images[i][7]);
+            proAnim[i] = createProAnim(images[i][8], images[i][9]);
         }
 
         // create creature sprites
@@ -280,6 +289,7 @@ public class ResourceManager {
             flyAnim[2], flyAnim[3]);
         grubSprite = new Grub(grubAnim[0], grubAnim[1],
             grubAnim[2], grubAnim[3]);
+        proSprite = new projectile(proAnim[0], proAnim[1]);
     }
 
 
@@ -310,6 +320,13 @@ public class ResourceManager {
 
 
     private Animation createGrubAnim(Image img1, Image img2) {
+        Animation anim = new Animation();
+        anim.addFrame(img1, 250);
+        anim.addFrame(img2, 250);
+        return anim;
+    }
+    
+    private Animation createProAnim(Image img1, Image img2) {
         Animation anim = new Animation();
         anim.addFrame(img1, 250);
         anim.addFrame(img2, 250);
